@@ -1,4 +1,4 @@
-array = [-3,12,55,7,1,-19,13,28]
+array = [-3,12,55,7,1,-19,13,28,59]
 for i in range(len(array) - 1):
     pos = i
     for j in range(pos + 1, len(array)):
@@ -9,3 +9,6 @@ for i in range(len(array) - 1):
         array[pos] = array[i]
         array[i] = t
 print(array)
+#
+#
+#
