@@ -20,8 +20,6 @@ int main(void)
         *g1 = '\0';
     }
 
-
-
     char *ptr = str;
     ptr = strstr(ptr,substr);
     while (ptr != NULL) 
