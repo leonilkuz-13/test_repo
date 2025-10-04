@@ -1,0 +1,49 @@
+[project]
+name = "your-project"
+version = "0.1.0"
+
+[tool.ruff]
+# ОБЩИЕ настройки для всего Ruff
+line-length = 120
+target-version = "py311"
+exclude = [
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "node_modules",
+    "migrations"
+]
+
+[tool.ruff.lint]
+select = [
+    "E",  # Pycodestyle Errors
+    "W",  # Pycodestyle Warnings
+    "F",  # Pyflakes
+    "I",  # Isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
+
+ignore = [
+    "E501",  # line too long
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["your_package_name"]
+lines-after-imports = 2
+combine-as-imports = true
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "double"
+
+[tool.ruff.format]
+# ТОЛЬКО эти поля разрешены:
+indent-style = "space"
+quote-style = "double"
+skip-magic-trailing-comma = false
+# line-ending = "auto"  # опционально
+# preview = false       # опционально
