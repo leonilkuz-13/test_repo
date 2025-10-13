@@ -7,21 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-        
     - name: Install Ruff
       run: pip install ruff
-      
     - name: Run Ruff
       run: ruff check --output-format=github src/
-      
     - name: Auto-fix Ruff issues
       run: ruff check --fix --exit-zero src/
-      
     - name: Check formatting
       run: ruff format --check src/
 
@@ -29,14 +24,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-        
     - name: Install dependencies
       run: pip install pytest
-    
     - name: Run tests
       run: pytest -v
