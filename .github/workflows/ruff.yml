@@ -1,58 +1,42 @@
-name: Ruff Check and Format
+name: CI
 
-on:
-  push:
-    branches: [ main, master, develop ]
-  pull_request:
-    branches: [ main, master, develop ]
+on: [push, pull_request]
 
 jobs:
-  ruff:
+  lint:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.x"
-          
-      - name: Install Ruff
-        run: pip install ruff
-        
-      - name: Run Ruff linting
-        run: ruff check --output-format=concise .
-        
-      - name: Auto-format code
-        run: ruff format .
-        
-      - name: Commit formatted code
-        if: always()
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git diff --staged --quiet || git commit -m "style: auto-format with ruff"
-          git push
-  test:
-  runs-on: ubuntu-latest
-  steps:
-  - uses: actions/checkout@v4
-  
-  - name: Set up Python
-    uses: actions/setup-python@v4
-    with:
-      python-version: '3.12'
-      
-  - name: Check Python version
-    run: python --version
-      
-  - name: Install dependencies
-    run: pip install pytest
+    - uses: actions/checkout@v4
     
-  - name: Run all tests
-    run: pytest -v
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install Ruff
+      run: pip install ruff
+      
+    - name: Run Ruff
+      run: ruff check --output-format=github src/
+      
+    - name: Auto-fix Ruff issues
+      run: ruff check --fix --exit-zero src/
+      
+    - name: Check formatting
+      run: ruff format --check src/
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: pip install pytest
+    
+    - name: Run tests
+      run: pytest -v
