@@ -10,5 +10,6 @@ typedef struct object_stack
 OBJ* push(OBJ* top, char symbol);
 OBJ* pop(OBJ* top);
 void freestack(OBJ* top);
+void show(OBJ* top);
 
 #endif
