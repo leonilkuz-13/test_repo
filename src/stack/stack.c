@@ -44,3 +44,10 @@ void show(OBJ* top)
         current = current->last;
     }
 }
+
+char peek(OBJ* top)
+{
+    if (top == NULL)
+        return 0;
+    return top->symbol;
+}
