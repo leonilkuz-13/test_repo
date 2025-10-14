@@ -44,12 +44,3 @@ void show(OBJ* top)
         current = current->last;
     }
 }
-
-int main(void)
-{
-    OBJ* top = NULL;
-    top = push(top, '1');
-    top = push(top, '2');
-    show(top);
-    return 0;
-}
