@@ -35,3 +35,21 @@ void freestack(OBJ* top)
         free(temp);
     }
 }
+}
+
+void show(OBJ* top)
+{
+    OBJ* current = top;
+    while (current != NULL)
+    {
+        printf("%c ", current->symbol);
+        current = current->last;
+    }
+}
+
+char peek(OBJ* top)
+{
+    if (top == NULL)
+        return 0;
+    return top->symbol;
+}
