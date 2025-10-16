@@ -1,8 +1,13 @@
+import os
 import random
+import sys
 
 import pytest
 
-from ..homework_in_Python.Heap_sort import heap_sort
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
+from homework_in_Python.Heap_sort import heap_sort
 
 
 def quick_sorted(array):
