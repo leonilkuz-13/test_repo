@@ -80,6 +80,8 @@ int main(void)
     if (top == NULL)
     {
         puts("bracket balanced");
+        freestack(top);
+        return 0;
     }
     else
     {
