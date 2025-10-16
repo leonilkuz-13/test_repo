@@ -2,7 +2,7 @@ import random
 
 import pytest
 
-from homework_in_Python.Heap_sort import heap_sort
+from src.homework_in_Python.Heap_sort import heap_sort
 
 
 def quick_sorted(array):
