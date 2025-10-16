@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#define ARRAY_SYMBOL 3
+#include <string.h>
 
 typedef struct object_stack
 {
@@ -34,7 +33,6 @@ void freestack(OBJ* top)
         top = top->last;
         free(temp);
     }
-}
 }
 
 void show(OBJ* top)

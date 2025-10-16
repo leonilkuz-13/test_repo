@@ -3,15 +3,15 @@
 #include <string.h>
 #include "stack.h"
 
-void append(char* ch, int* campsity, int* lenght, char** str)
+void append(char* ch, int* capasity, int* lenght, char** str)
 {
-    if (*campsity - 1 <= *lenght)
+    if (*capasity - 1 <= *lenght)
     {
-        char* ptr = malloc(sizeof(char) * *campsity * 2);
+        char* ptr = malloc(sizeof(char) * *capasity * 2);
         if (ptr == NULL)
             return;
 
-        *campsity *= 2;
+        *capasity *= 2;
         strcpy(ptr, *str);
         free(*str);
         *str = ptr;
@@ -23,14 +23,14 @@ void append(char* ch, int* campsity, int* lenght, char** str)
 
 char* reading(void)
 {
-    int campsity = 10;
+    int capasity = 10;
     int lenght = 0;
-    char* str = malloc(sizeof(char) * campsity);
+    char* str = malloc(sizeof(char) * capasity);
     if (str == NULL)
         return NULL;
     char ch;
     while ((ch = getchar()) != EOF)
-        append(&ch, &campsity, &lenght, &str);
+        append(&ch, &capasity, &lenght, &str);
     return str;
 }
 int main(void)
