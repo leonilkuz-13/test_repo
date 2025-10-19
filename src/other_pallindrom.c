@@ -1,40 +1,44 @@
 #include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
 
-int palindrom(int array[], int len)
+int digit_sum(int n)
 {
-    for (int i = 0; i < len / 2; i++)
-    {
-        if (array[i] != array[len - 1 - i])
-            return 0;
-    }
-    return 1;
-}
-
-void bin(int n, int num[], int* len)
-{
-    int i = 0;
+    int sum = 0;
     while (n > 0)
     {
-        num[i] = n % 2;
-        n = n / 2;
-        i++;
+        sum += n % 10;
+        n /= 10;
     }
-    *len = i;
+    return sum;
 }
 
 int main(void)
 {
-    int n;
-    scanf("%d", &n);
-    for (int i = 1; i < n + 1; i++)
+    int ar[] = {13, 15, 17, 27, 99, 108, 54, 31};
+    int size = sizeof(ar) / sizeof(int);
+    int max_sum = 0;
+    for (int i = 0; i < size; i++)
     {
-        int len = 0;
-        int num[32];
-        bin(i, num, &len);
-        if (palindrom(num, len))
-            printf("%d ", i);
+        int sum = digit_sum(ar[i]);
+        if (sum > max_sum)
+        {
+            max_sum = sum;
+        }
+    }
+    int ar1[sizeof(ar)];
+    for (int j = 0; j < sizeof(ar) / sizeof(ar[0]); j++)
+    {
+        if (digit_sum(ar[j]) == max_sum)
+        {
+            ar1[j] = ar[j];
+        }
+        else
+        {
+            ar1[j] = -1;
+        }
+    }
+    for (int i = 0; i < sizeof(ar1) / sizeof(ar1[0]); i++)
+    {
+        printf("%d ", ar1[i]);
     }
     return 0;
 }
