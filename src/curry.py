@@ -18,20 +18,9 @@ def uncurry(func_curry, arrity):
     def uncurring(*args):
         if len(args) != arrity:
             raise Exception("incorrect arrity")
-        current = func_curry
+        func = func_curry
         for i in args:
-            current = current(i)
-        return current
+            func = func(i)
+        return func
 
     return uncurring
-
-
-def sum3(x, y, z):
-    return x + y + z
-
-
-ss = curry(sum3, 3)
-unc = uncurry(ss, 3)
-
-print(ss(1, 2)(3))
-print(unc(1, 2, 3))
