@@ -1,4 +1,6 @@
-Леонид
-leonilfilippenkov@gmail.com -- почта
-@qwekkh -- телеграм
-3.12.3 - версия python
+# Контактная информация
+
+- **Имя:** Леонид
+- **Почта:** leonifilippenkov@gmail.com
+- **Телеграм:** @qwekkh
+- **Версия Python:** 3.12.3
