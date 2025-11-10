@@ -45,7 +45,6 @@ int main(void)
     char* str = reading();
     Node* top = NULL;
     size_t len = strlen(str);
-
     for (int i = 0; i < len; i++) {
         if (str[i] == '(' || str[i] == '[' || str[i] == '{')
             top = push(top, str[i]);
