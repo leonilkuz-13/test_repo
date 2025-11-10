@@ -37,7 +37,7 @@ int main(void)
 {
     char* str = reading();
     OBJ* top = NULL;
-    size_t len = strlen(str);
+    int len = strlen(str);
 
     for (int i = 0; i < len; i++)
     {
