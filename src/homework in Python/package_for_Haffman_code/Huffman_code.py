@@ -1,4 +1,5 @@
 import heapq
+import pickle
 from collections import Counter
 
 
@@ -64,4 +65,22 @@ def decode(encoded_text: str, table: dict[str, str]) -> str:
             string += reversed_codes[symbol]
             symbol = ""
         symbol += i
+    return string
+
+
+def encode_file(msg):
+    encode_text, codes = encode(msg)
+
+    with open("file12.bin", "wb") as file:
+        pickle.dump(codes, file)
+
+    return encode_text
+
+
+def decode_file(encode_text):
+    with open("file12.bin", "rb") as file:
+        codes = pickle.load(file)
+
+    string = decode(encode_text, codes)
+
     return string
