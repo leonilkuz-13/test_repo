@@ -4,28 +4,25 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct Node
-{
+typedef struct Node {
     int data;
     struct Node* next;
 } Node;
 
-typedef struct List
-{
+typedef struct List {
     Node* tail;
     Node* head;
     int len;
 } List;
 
-bool indexCorrectness(List* l, int index);
-bool indexCorrectnessToInsert(List* l, int index);
+bool CheckIndex(List* l, int index);
 List* newList();
-int findIndexToInsert(List* l, int digit);
-int findIndexToRemove(List* l, int digit);
-void insert(int index, List* l, int digit);
+int findIndexToInsert(List* l, int number);
+int findIndexToRemove(List* l, int number);
+void insert(int index, List* l, int number);
 int get(List* l, int index);
 void listElementRemove(List* l, int index);
 void printList(List* l);
-void Exit(List* l);
+void deleteList(List* l);
 
 #endif

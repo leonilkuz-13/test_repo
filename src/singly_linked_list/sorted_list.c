@@ -1,12 +1,6 @@
 #include "singly_linked_list.h"
 
-typedef enum instruction
-{
-    EXIT,
-    ADD,
-    REMOVE,
-    PRINT
-} Instruction;
+typedef enum instruction { EXIT, ADD, REMOVE, PRINT } Instruction;
 
 int main(void)
 {
@@ -14,17 +8,14 @@ int main(void)
     int value;
     Instruction choice;
 
-    do
-    {
-        puts("");
+    do {
         puts("0 - Exit");
         puts("1 - Add element in list");
         puts("2 - Remove element");
         puts("3 - Print list");
         puts("enter number");
         int input;
-        if (scanf("%d", &input) != 1)
-        {
+        if (scanf("%d", &input) != 1) {
             puts("NUMBER!");
             while (getchar() != '\n')
                 continue;
@@ -32,17 +23,15 @@ int main(void)
         }
 
         choice = (Instruction)input;
-        switch (choice)
-        {
+        switch (choice) {
             case EXIT:
-                Exit(l);
+                deleteList(l);
                 puts("list released");
                 break;
 
             case ADD:
                 puts("enter number");
-                while (scanf("%d", &value) != 1)
-                {
+                while (scanf("%d", &value) != 1) {
                     puts("NUMBER!!!");
                     while (getchar() != '\n')
                         continue;
@@ -53,8 +42,7 @@ int main(void)
 
             case REMOVE:
                 puts("enter number");
-                while (scanf("%d", &value) != 1)
-                {
+                while (scanf("%d", &value) != 1) {
                     puts("NUMBER!!!");
                     while (getchar() != '\n')
                         continue;
