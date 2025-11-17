@@ -189,22 +189,7 @@ void printList(List* l)
         printf("%d ", temp->data);
         temp = temp->next;
     }
-    void printList(List * l)
-    {
-        if (l == NULL) {
-            return;
-        }
-        Node* temp = l->head;
-        int len = l->len;
-        for (int i = 0; i < len; i++) {
-            if (temp == NULL) {
-                return;
-            }
-            printf("%d ", temp->data);
-            temp = temp->next;
-        }
-        printf("\n");
-    }
+    printf("\n");
 }
 
 void deleteList(List* l)
