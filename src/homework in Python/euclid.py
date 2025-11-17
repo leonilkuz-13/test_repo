@@ -3,8 +3,8 @@ s_i = [1, 0]
 t_i = [0, 1]
 
 # ввожу в массив числа, а после буду хранить там остаток от деления
+print("enter 2 numbers")
 r = sorted(int(input()) for i in range(2))[::-1]
-
 
 while r[-1] != 0:
     q = r[-2] // r[-1]
