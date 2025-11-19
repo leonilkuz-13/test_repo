@@ -1,17 +1,13 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include "stack.h"
 
-void append(char* ch, int* capasity, int* lenght, char** str)
+void append(char* ch, int* capacity, int* lenght, char** str)
 {
-    if (*capasity - 1 <= *lenght)
-    {
-        char* ptr = malloc(sizeof(char) * *capasity * 2);
+    if (*capacity - 1 <= *lenght) {
+        char* ptr = malloc(sizeof(char) * *capacity * 2);
         if (ptr == NULL)
             return;
 
-        *capasity *= 2;
+        *capacity *= 2;
         strcpy(ptr, *str);
         free(*str);
         *str = ptr;
@@ -23,14 +19,14 @@ void append(char* ch, int* capasity, int* lenght, char** str)
 
 char* reading(void)
 {
-    int capasity = 10;
+    int capacity = 10;
     int lenght = 0;
-    char* str = malloc(sizeof(char) * capasity);
+    char* str = malloc(sizeof(char) * capacity);
     if (str == NULL)
         return NULL;
     char ch;
     while ((ch = getchar()) != EOF)
-        append(&ch, &capasity, &lenght, &str);
+        append(&ch, &capacity, &lenght, &str);
     return str;
 }
 int main(void)
@@ -39,36 +35,25 @@ int main(void)
     OBJ* top = NULL;
     size_t len = strlen(str);
 
-    for (int i = 0; i < len; i++)
-    {
-        if (str[i] == '(' || str[i] == '[' || str[i] == '{')
-        {
+    for (int i = 0; i < len; i++) {
+        if (str[i] == '(' || str[i] == '[' || str[i] == '{') {
             top = push(top, str[i]);
-        }
-        else if (str[i] == ')')
-        {
-            if (top == NULL || top->symbol != '(')
-            {
+        } else if (str[i] == ')') {
+            if (top == NULL || top->symbol != '(') {
                 puts("error balanced");
                 freestack(top);
                 return 1;
             }
             top = pop(top);
-        }
-        else if (str[i] == ']')
-        {
-            if (top == NULL || top->symbol != '[')
-            {
+        } else if (str[i] == ']') {
+            if (top == NULL || top->symbol != '[') {
                 puts("error balanced");
                 freestack(top);
                 return 1;
             }
             top = pop(top);
-        }
-        else if (str[i] == '}')
-        {
-            if (top == NULL || top->symbol != '{')
-            {
+        } else if (str[i] == '}') {
+            if (top == NULL || top->symbol != '{') {
                 puts("error balanced");
                 freestack(top);
                 return 1;
@@ -77,14 +62,11 @@ int main(void)
         }
     }
 
-    if (top == NULL)
-    {
+    if (top == NULL) {
         puts("bracket balanced");
         freestack(top);
         return 0;
-    }
-    else
-    {
+    } else {
         puts("unclosed brackets");
         freestack(top);
         return 1;
