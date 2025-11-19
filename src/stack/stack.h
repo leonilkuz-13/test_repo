@@ -1,8 +1,10 @@
 #ifndef STACK_H
 #define STACK_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-typedef struct object_stack
-{
+typedef struct object_stack {
     char symbol;
     struct object_stack* last;
 } OBJ;

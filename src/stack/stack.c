@@ -1,12 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-typedef struct object_stack
-{
-    char symbol;
-    struct object_stack* last;
-} OBJ;
+#include "stack.h"
 
 OBJ* push(OBJ* top, char symbol)
 {
@@ -27,8 +19,7 @@ OBJ* pop(OBJ* top)
 
 void freestack(OBJ* top)
 {
-    while (top != NULL)
-    {
+    while (top != NULL) {
         OBJ* temp = top;
         top = top->last;
         free(temp);
@@ -38,8 +29,7 @@ void freestack(OBJ* top)
 void show(OBJ* top)
 {
     OBJ* current = top;
-    while (current != NULL)
-    {
+    while (current != NULL) {
         printf("%c ", current->symbol);
         current = current->last;
     }
