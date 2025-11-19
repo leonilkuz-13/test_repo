@@ -7,32 +7,24 @@ int main(void)
     scanf("%d %d", &a, &b);
     int cnt = 0;
 
-    if (a > 0 && b != 0)
-    {
-        while (a > 0)
-        {
-            if (a - b > 0)
-            {
-                a -= b;
-                cnt++;
-            }
-            if (a - b < 0)
-            {
-                printf("incomplete quotient = %d", cnt);
-                a -= b;
-            }
-            if (a - b == 0)
-            {
-                a -= b;
-                cnt++;
-                printf("incomplete quotient = %d", cnt);
-            }
-        }
-        return 0;
-    }
-    else
-    {
+    if (b == 0) {
         puts("Incorrect input");
         return 0;
     }
+
+    int sign = 1;
+    if ((a < 0 && b > 0) || (a > 0 && b < 0)) {
+        sign = -1;
+    }
+
+    int dividend = abs(a);
+    int divisor = abs(b);
+
+    while (dividend >= divisor) {
+        dividend -= divisor;
+        cnt++;
+    }
+
+    printf("incomplete quotient = %d", cnt * sign);
+    return 0;
 }
