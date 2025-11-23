@@ -1,9 +1,23 @@
 {
   "python.linting.enabled": true,
   "python.linting.ruffEnabled": true,
-  "python.linting.ruffPath": "ruff",  // или укажите полный путь к ruff, если нужно
+  "python.linting.ruffPath": "ruff", // или укажите полный путь к ruff, если нужно
   "python.linting.ruffArgs": [
     "--select",
     "E,W"
-  ]
+  ],
+  "python.testing.pytestArgs": [
+    "."
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
+}
+
+{
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": [
+    "-v",
+    "--rootdir=${workspaceFolder}"
+  ],
+  "python.testing.cwd": "${workspaceFolder}/src"
 }
