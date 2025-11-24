@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Object_stack {
+typedef struct ObjectStack {
     char symbol;
-    struct Object_stack* last;
+    struct ObjectStack* last;
 } OBJ;
 
 OBJ* push(OBJ* top, char symbol);
