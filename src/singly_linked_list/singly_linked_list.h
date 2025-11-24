@@ -16,14 +16,14 @@ typedef struct List {
     int len;
 } List;
 
-bool CheckIndex(List* l, int index);
+bool checkIndex(List* list, int index);
 List* newList();
-int findIndexToInsert(List* l, int number);
-int findIndexToRemove(List* l, int number);
-void insert(int index, List* l, int number);
-int get(List* l, int index);
-void listElementRemove(List* l, int index);
-void printList(List* l);
-void deleteList(List* l);
+int findIndexToInsert(List* list, int number);
+int findIndexToRemove(List* list, int number);
+void insert(int index, List* list, int number);
+int get(List* list, int index);
+void listElementRemove(List* list, int index);
+void printList(List* list);
+void deleteList(List* list);
 
 #endif

@@ -1,11 +1,11 @@
 #include "singly_linked_list.h"
 
-bool CheckIndex(List* l, int index)
+bool checkIndex(List* list, int index)
 {
-    if (l == NULL) {
+    if (list == NULL) {
         return false;
     }
-    if (l->len <= index) {
+    if (list->len <= index) {
         puts("index is greater than array length!!");
         return false;
     }
@@ -18,26 +18,26 @@ bool CheckIndex(List* l, int index)
 
 List* newList()
 {
-    List* l = malloc(sizeof(List));
-    if (l == NULL) {
+    List* list = malloc(sizeof(List));
+    if (list == NULL) {
         return NULL;
     }
-    l->head = NULL;
-    l->tail = NULL;
-    l->len = 0;
+    list->head = NULL;
+    list->tail = NULL;
+    list->len = 0;
     return l;
 }
 
-int findIndexToInsert(List* l, int number)
+int findIndexToInsert(List* list, int number)
 {
-    if (l == NULL) {
+    if (list == NULL) {
         return 0;
     }
-    if (l->head == NULL) {
+    if (list->head == NULL) {
         return 0;
     }
 
-    Node* ptr_find = l->head;
+    Node* ptr_find = list->head;
     int index = 0;
 
     while (ptr_find != NULL && ptr_find->data < number) {
@@ -50,17 +50,17 @@ int findIndexToInsert(List* l, int number)
     return index;
 }
 
-int findIndexToRemove(List* l, int number)
+int findIndexToRemove(List* list, int number)
 {
-    if (l == NULL) {
+    if (list == NULL) {
         return -1;
     }
-    Node* ptr_find = l->head;
+    Node* ptr_find = list->head;
     if (ptr_find == NULL) {
         return -1;
     }
     int index = 0;
-    int len = l->len;
+    int len = list->len;
     while (ptr_find != NULL && ptr_find->data != number) {
         if (index + 1 == len) {
             return -1;
@@ -74,12 +74,12 @@ int findIndexToRemove(List* l, int number)
     return index;
 }
 
-void insert(int index, List* l, int number)
+void insert(int index, List* list, int number)
 {
-    if (l == NULL) {
+    if (list == NULL) {
         return;
     }
-    if (index < 0 || index > l->len) {
+    if (index < 0 || index > list->len) {
         return;
     }
 
@@ -90,35 +90,35 @@ void insert(int index, List* l, int number)
     new_element->data = number;
     new_element->next = NULL;
 
-    if (l->len == 0) {
-        l->head = new_element;
-        l->tail = new_element;
+    if (list->len == 0) {
+        list->head = new_element;
+        list->tail = new_element;
     } else if (index == 0) {
-        new_element->next = l->head;
-        l->head = new_element;
-    } else if (index == l->len) {
-        l->tail->next = new_element;
-        l->tail = new_element;
+        new_element->next = list->head;
+        list->head = new_element;
+    } else if (index == list->len) {
+        list->tail->next = new_element;
+        list->tail = new_element;
     } else {
-        Node* temp = l->head;
+        Node* temp = list->head;
         for (int i = 0; i < index - 1; i++) {
             temp = temp->next;
         }
         new_element->next = temp->next;
         temp->next = new_element;
     }
-    l->len++;
+    list->len++;
 }
 
-int get(List* l, int index)
+int get(List* list, int index)
 {
-    if (l == NULL) {
+    if (list == NULL) {
         return -1;
     }
-    if (!CheckIndex(l, index)) {
+    if (!CheckIndex(list, index)) {
         return -1;
     }
-    Node* temp = l->head;
+    Node* temp = list->head;
     if (temp == NULL) {
         return -1;
     }
@@ -134,22 +134,22 @@ int get(List* l, int index)
     return temp->data;
 }
 
-void listElementRemove(List* l, int index)
+void listElementRemove(List* list, int index)
 {
-    if (l == NULL) {
+    if (list == NULL) {
         return;
     }
-    if (!CheckIndex(l, index)) {
+    if (!CheckIndex(list, index)) {
         return;
     }
 
-    Node* temp = l->head;
+    Node* temp = list->head;
     if (temp == NULL) {
         return;
     }
 
     if (index == 0) {
-        l->head = temp->next;
+        list->head = temp->next;
         free(temp);
     } else {
         for (int i = 0; i < index - 1; i++) {
@@ -167,21 +167,21 @@ void listElementRemove(List* l, int index)
             return;
         }
         temp->next = temp1->next;
-        if (temp1 == l->tail) {
-            l->tail = temp;
+        if (temp1 == list->tail) {
+            list->tail = temp;
         }
         free(temp1);
     }
-    l->len--;
+    list->len--;
 }
 
-void printList(List* l)
+void printList(List* list)
 {
-    if (l == NULL) {
+    if (list == NULL) {
         return;
     }
-    Node* temp = l->head;
-    int len = l->len;
+    Node* temp = list->head;
+    int len = list->len;
     for (int i = 0; i < len; i++) {
         if (temp == NULL) {
             return;
@@ -192,16 +192,16 @@ void printList(List* l)
     printf("\n");
 }
 
-void deleteList(List* l)
+void deleteList(List* list)
 {
-    if (l == NULL) {
+    if (list == NULL) {
         return;
     }
-    Node* ptr = l->head;
+    Node* ptr = list->head;
     while (ptr != NULL) {
         Node* ptr1 = ptr;
         ptr = ptr->next;
         free(ptr1);
     }
-    free(l);
+    free(list);
 }
