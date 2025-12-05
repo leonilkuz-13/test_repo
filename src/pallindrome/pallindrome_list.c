@@ -114,7 +114,7 @@ void deleteList(LIST* list)
     free(list);
 }
 
-int CheckPallindrome(LIST* list)
+int сheckPallindrome(LIST* list)
 {
     if (list == NULL)
         return -1;

@@ -62,7 +62,7 @@ bool testPalindrome()
     append(20, list1, 3);
     append(10, list1, 4);
 
-    if (CheckPallindrome(list1) != 0) {
+    if (сheckPallindrome(list1) != 0) {
         passed = false;
     }
     deleteList(list1);
@@ -75,7 +75,7 @@ bool testPalindrome()
     append(20, list2, 4);
     append(10, list2, 5);
 
-    if (CheckPallindrome(list2) != -1) {
+    if (сheckPallindrome(list2) != -1) {
         passed = false;
     }
     deleteList(list2);
@@ -83,7 +83,7 @@ bool testPalindrome()
     LIST* list3 = initList();
     append(5, list3, 0);
 
-    if (CheckPallindrome(list3) != 0) {
+    if (сheckPallindrome(list3) != 0) {
         passed = false;
     }
     deleteList(list3);

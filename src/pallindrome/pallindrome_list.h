@@ -21,5 +21,5 @@ void appendToEmptyList(LIST* list, NODE* ptr);
 void appendToBegging(int number, LIST* list);
 void append(int number, LIST* list, int index);
 void deleteList(LIST* list);
-int CheckPallindrome(LIST* list);
+int сheckPallindrome(LIST* list);
 #endif
