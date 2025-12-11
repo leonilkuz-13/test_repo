@@ -11,14 +11,14 @@ else()
 endif()
 
 add_executable(fast_polynomial_calculation
-            "src/Homework in C/1/fast polynomial calculation.c")
+            "src/Homework_in_C/1/fast_polynomial_calculation.c")
 
 add_executable(incomplete_quotient
-            "src/Homework in C/1/incomplete quotient.c")
+            "src/Homework_in_C/1/incomplete_quotient.c")
 
 add_executable(lucky_tickets
-            "src/Homework in C/1/lucky tickets.c")
+            "src/Homework_in_C/1/lucky_tickets.c")
 
 add_executable(permutation_array_segments
-            "src/Homework in C/1/permutation array segments.c")
+            "src/Homework_in_C/1/permutation_array_segments.c")
 
