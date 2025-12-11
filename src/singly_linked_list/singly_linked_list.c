@@ -1,11 +1,11 @@
 #include "singly_linked_list.h"
 
-bool CheckIndex(List* l, int index)
+bool checkIndex(List* list, int index)
 {
-    if (l == NULL) {
+    if (list == NULL) {
         return false;
     }
-    if (l->len <= index) {
+    if (list->len <= index) {
         puts("index is greater than array length!!");
         return false;
     }
@@ -18,13 +18,13 @@ bool CheckIndex(List* l, int index)
 
 List* newList()
 {
-    List* l = malloc(sizeof(List));
-    if (l == NULL) {
+    List* list = malloc(sizeof(List));
+    if (list == NULL) {
         return NULL;
     }
-    l->head = NULL;
-    l->tail = NULL;
-    l->len = 0;
+    list->head = NULL;
+    list->tail = NULL;
+    list->len = 0;
     return l;
 }
 
@@ -115,7 +115,7 @@ int get(List* l, int index)
     if (l == NULL) {
         return -1;
     }
-    if (!CheckIndex(l, index)) {
+    if (!checkIndex(list, index)) {
         return -1;
     }
     Node* temp = l->head;
@@ -139,7 +139,7 @@ void listElementRemove(List* l, int index)
     if (l == NULL) {
         return;
     }
-    if (!CheckIndex(l, index)) {
+    if (!checkIndex(list, index)) {
         return;
     }
 

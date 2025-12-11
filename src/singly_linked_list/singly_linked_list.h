@@ -15,7 +15,7 @@ typedef struct List {
     int len;
 } List;
 
-bool CheckIndex(List* l, int index);
+bool checkIndex(List* list, int index);
 List* newList();
 int findIndexToInsert(List* l, int number);
 int findIndexToRemove(List* l, int number);
