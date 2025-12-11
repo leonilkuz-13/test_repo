@@ -6,15 +6,13 @@ int main(void)
     scanf("%d %d", &n, &m);
     if (n <= m)
         printf("incorrect input");
-    else
-    {
+    else {
         int array[n + 1]; /* если n — последний элемент, то всего элементов n + 1 */
 
         for (int i = 0; i < sizeof(array) / sizeof(*array); i++)
             array[i] = i + 1; /* массив вида {1, 2, ..., n, n + 1} */
 
-        for (int k = 0; k <= n - (m + 1); k++)
-        {
+        for (int k = 0; k <= n - (m + 1); k++) {
             int t = array[n];
             for (int j = n; j > 0; j--)
                 array[j] = array[j - 1];
