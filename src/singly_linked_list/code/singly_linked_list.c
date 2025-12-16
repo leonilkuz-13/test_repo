@@ -25,7 +25,7 @@ List* newList()
     list->head = NULL;
     list->tail = NULL;
     list->len = 0;
-    return l;
+    return list;
 }
 
 int findIndexToInsert(List* list, int number)
@@ -115,7 +115,7 @@ int get(List* list, int index)
     if (list == NULL) {
         return -1;
     }
-    if (!CheckIndex(list, index)) {
+    if (!checkIndex(list, index)) {
         return -1;
     }
     Node* temp = list->head;
@@ -139,7 +139,7 @@ void listElementRemove(List* list, int index)
     if (list == NULL) {
         return;
     }
-    if (!CheckIndex(list, index)) {
+    if (!checkIndex(list, index)) {
         return;
     }
 
@@ -150,6 +150,7 @@ void listElementRemove(List* list, int index)
 
     if (index == 0) {
         list->head = temp->next;
+        list->tail = temp->next;
         free(temp);
     } else {
         for (int i = 0; i < index - 1; i++) {

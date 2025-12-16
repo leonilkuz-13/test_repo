@@ -1,5 +1,5 @@
-#ifndef SINGLY_LINKED_LIST
-#define SINGLY_LINKED_LIST
+#pragma once
+
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -24,5 +24,3 @@ int get(List* list, int index);
 void listElementRemove(List* list, int index);
 void printList(List* list);
 void deleteList(List* list);
-
-#endif
