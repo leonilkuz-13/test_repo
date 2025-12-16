@@ -7,9 +7,6 @@ int main(void)
     char substr[100];
     int count = 0;
 
-    fgets(str, sizeof(str), stdin);
-    fgets(substr, sizeof(substr), stdin);
-
     if (fgets(str, sizeof(str), stdin) == NULL) {
         return 1;
     }
