@@ -4,7 +4,9 @@ int main(void)
 {
     int number;
 
-    scanf("%d", &number);
+    if (scanf("%d", &number) != 1) {
+        return 1;
+    }
 
     int square = number * number;
 

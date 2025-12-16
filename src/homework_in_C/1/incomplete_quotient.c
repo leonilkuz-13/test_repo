@@ -3,8 +3,11 @@
 
 int main(void)
 {
-    int num1, num2;
-    scanf("%d %d", &num1, &num2);
+    int num1;
+    int num2;
+    if (scanf("%d %d", &num1, &num2) != 2) {
+        return 1;
+    }
     int cnt = 0;
 
     if (num2 == 0) {
