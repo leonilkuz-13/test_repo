@@ -2,30 +2,29 @@
 
 int main(void)
 {
-    int const n, m;
-    scanf("%d %d", &n, &m);
-    if (n <= m)
+    int const arrayLength, segmentSize;
+    scanf("%d %d", &arrayLength, &segmentSize);
+
+    if (arrayLength <= segmentSize) {
         printf("incorrect input");
-    else {
-        int array[n + 1]; /* если n — последний элемент, то всего элементов n + 1 */
+    } else {
+        int array[arrayLength + 1];
 
-        for (int i = 0; i < sizeof(array) / sizeof(*array); i++)
-            array[i] = i + 1; /* массив вида {1, 2, ..., n, n + 1} */
-
-        for (int k = 0; k <= n - (m + 1); k++) {
-            int t = array[n];
-            for (int j = n; j > 0; j--)
-                array[j] = array[j - 1];
-            array[0] = t;
+        for (int index = 0; index < sizeof(array) / sizeof(*array); index++) {
+            array[index] = index + 1;
         }
 
-        for (int i = 0; i < sizeof(array) / sizeof(*array); i++)
-            printf("%d ", array[i]);
+        for (int shiftCount = 0; shiftCount <= arrayLength - (segmentSize + 1); shiftCount++) {
+            int tempValue = array[arrayLength];
+            for (int position = arrayLength; position > 0; position--) {
+                array[position] = array[position - 1];
+            }
+            array[0] = tempValue;
+        }
+
+        for (int index = 0; index < sizeof(array) / sizeof(*array); index++) {
+            printf("%d ", array[index]);
+        }
     }
-
-    /* В условии задачи индексация с array[1] элемента, а в моем решении — с array[0].
-       Т.е., если на входе m = 2, то будут передвинуты 3 элемента.
-       Надеюсь, что я правильно понял задачу, и это не ошибка. */
-
     return 0;
 }

@@ -3,22 +3,22 @@
 
 int main(void)
 {
-    int a, b;
-    scanf("%d %d", &a, &b);
+    int num1, num2;
+    scanf("%d %d", &num1, &num2);
     int cnt = 0;
 
-    if (b == 0) {
+    if (num2 == 0) {
         puts("Incorrect input");
         return 0;
     }
 
     int sign = 1;
-    if ((a < 0 && b > 0) || (a > 0 && b < 0)) {
+    if ((num1 < 0 && num2 > 0) || (num1 > 0 && num2 < 0)) {
         sign = -1;
     }
 
-    int dividend = abs(a);
-    int divisor = abs(b);
+    int dividend = abs(num1);
+    int divisor = abs(num2);
 
     while (dividend >= divisor) {
         dividend -= divisor;

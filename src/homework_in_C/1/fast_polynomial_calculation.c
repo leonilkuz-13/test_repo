@@ -2,13 +2,13 @@
 
 int main(void)
 {
-    int x;
+    int number;
 
-    scanf("%d", &x);
+    scanf("%d", &number);
 
-    int square = x * x;
+    int square = number * number;
 
-    printf("%d", (square + x) * (square + 1) + 1);
+    printf("%d", (square + number) * (square + 1) + 1);
 
     return 0;
 }
