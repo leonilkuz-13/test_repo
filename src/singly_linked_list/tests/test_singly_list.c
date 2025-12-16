@@ -3,11 +3,15 @@
 bool testEmptyList()
 {
     List* list = newList();
-    bool valid1 = (list != NULL);
-    bool valid2 = (list->len == 0);
-    bool valid3 = (list->head == NULL);
-    bool valid4 = (list->tail == NULL);
-    bool result = valid1 && valid2 && valid3 && valid4;
+    if (list == NULL) {
+        puts("failed test 1: newList returned NULL");
+        return false;
+    }
+
+    bool valid1 = (list->len == 0);
+    bool valid2 = (list->head == NULL);
+    bool valid3 = (list->tail == NULL);
+    bool result = valid1 && valid2 && valid3;
 
     if (result) {
         puts("test 1 passed");
