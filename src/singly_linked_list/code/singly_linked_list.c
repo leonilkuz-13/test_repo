@@ -37,13 +37,13 @@ int findIndexToInsert(List* list, int number)
         return 0;
     }
 
-    Node* ptr_find = list->head;
+    Node* ptr = list->head;
     int index = 0;
 
-    while (ptr_find != NULL && ptr_find->data < number) {
+    while (ptr != NULL && ptr->data < number) {
         index++;
-        ptr_find = ptr_find->next;
-        if (ptr_find == NULL) {
+        ptr = ptr->next;
+        if (ptr == NULL) {
             return index;
         }
     }
@@ -55,20 +55,20 @@ int findIndexToRemove(List* list, int number)
     if (list == NULL) {
         return -1;
     }
-    Node* ptr_find = list->head;
-    if (ptr_find == NULL) {
+    Node* ptr = list->head;
+    if (ptr == NULL) {
         return -1;
     }
     int index = 0;
     int len = list->len;
-    while (ptr_find != NULL && ptr_find->data != number) {
+    while (ptr != NULL && ptr->data != number) {
         if (index + 1 == len) {
             return -1;
         }
-        ptr_find = ptr_find->next;
+        ptr = ptr->next;
         index++;
     }
-    if (ptr_find == NULL) {
+    if (ptr == NULL) {
         return -1;
     }
     return index;
@@ -83,29 +83,29 @@ void insert(int index, List* list, int number)
         return;
     }
 
-    Node* new_element = malloc(sizeof(Node));
-    if (new_element == NULL) {
+    Node* newElement = malloc(sizeof(Node));
+    if (newElement == NULL) {
         return;
     }
-    new_element->data = number;
-    new_element->next = NULL;
+    newElement->data = number;
+    newElement->next = NULL;
 
     if (list->len == 0) {
-        list->head = new_element;
-        list->tail = new_element;
+        list->head = newElement;
+        list->tail = newElement;
     } else if (index == 0) {
-        new_element->next = list->head;
-        list->head = new_element;
+        newElement->next = list->head;
+        list->head = newElement;
     } else if (index == list->len) {
-        list->tail->next = new_element;
-        list->tail = new_element;
+        list->tail->next = newElement;
+        list->tail = newElement;
     } else {
         Node* temp = list->head;
         for (int i = 0; i < index - 1; i++) {
             temp = temp->next;
         }
-        new_element->next = temp->next;
-        temp->next = new_element;
+        newElement->next = temp->next;
+        temp->next = newElement;
     }
     list->len++;
 }
