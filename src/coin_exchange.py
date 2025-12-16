@@ -4,7 +4,7 @@ patronymic = input().strip()
 
 coin1 = len(name)
 coin2 = len(surname)
-coin3 = len(patronymic) if patronymic else 19
+coin3 = len(patronymic)
 
 amount = int(input().strip())
 
