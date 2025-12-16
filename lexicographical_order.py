@@ -1,20 +1,29 @@
-# функция возвращает -1, если первая строка меньшем, чем вторая, 1, если больше, и 0, если равны
-# Г.А не понравилось обрабатывание отедльного случая с буквой ё, я убрал. передаем строки без ё )))
+def processing_individual_letters(string: str) -> int:
+    s = []
+    for x in string.lower():
+        code = ord(x)
+        if code == 1105:
+            s.append(1078)
+        elif code > 1077:
+            s.append(code + 1)
+        else:
+            s.append(code)
+    return s
 
 
-def reverse_lexicographic_order(string1: str, string2: str) -> int:
-    index = 0
-    len1 = len(string1)
-    len2 = len(string2)
+# true, если первая строка больше, false, если нет.
+def reverse_lexicographical_order(string1: str, string2: str) -> bool:
+    array1 = processing_individual_letters(string1)
+    array2 = processing_individual_letters(string2)
+    if len(array1) > len(array2):
+        return True
+    elif len(array1) < len(array2):
+        return False
+    for i in range(len(array1)):
+        if array1[i] > array2[i]:
+            return True
+        elif array1[i] < array2[i]:
+            return False
 
-    while index < len1 and index < len2:
-        if string1[index] > string2[index]:
-            return -1
-        elif string1[index] < string2[index]:
-            return 1
-        index += 1
-    if len1 < len2:
-        return -1
-    elif len1 > len2:
-        return 1
-    return 0
+
+print(reverse_lexicographical_order(input(), input()))
