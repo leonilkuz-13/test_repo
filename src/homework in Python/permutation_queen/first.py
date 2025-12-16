@@ -1,5 +1,6 @@
 from itertools import permutations
 
+
 N = int(input())
 
 
