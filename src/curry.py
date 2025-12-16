@@ -1,26 +1,41 @@
-def curry(func, arrity):
-    def curring(*args):
-        if len(args) == arrity:
+def curry(func, arity):
+    if not isinstance(arity, int):
+        raise TypeError("arity is not integer")
+    if arity < 0:
+        raise ValueError("arity must be non-negative")
+
+    def curried(*args):
+        if len(args) == arity:
             return func(*args)
-        elif len(args) > arrity:
-            raise Exception("incorrect arrity")
+        elif len(args) > arity:
+            raise ValueError(
+                "there are more arguments than arity"
+            )  # бесполезная проверка? или в комментариях к PR просили в uncurry?
         else:
 
-            def insert(*new_args):
-                return curring(*(args + new_args))
+            def inner(*new_args):
+                return curried(*(args + new_args))
 
-        return insert
+            return inner
 
-    return curring
+    return curried
 
 
-def uncurry(func_curry, arrity):
-    def uncurring(*args):
-        if len(args) != arrity:
-            raise Exception("incorrect arrity")
-        func = func_curry
-        for i in args:
-            func = func(i)
-        return func
+def uncurry(curried_func, arity):
+    if not isinstance(arity, int):
+        raise TypeError("arity is't integer")
+    if arity < 0:
+        raise ValueError("arity must be non-negative")
 
-    return uncurring
+    def uncurried(*args):
+        if len(args) != arity:
+            raise ValueError("there are more arguments than arity")
+
+        result = curried_func
+        for arg in args:
+            if not callable(result):
+                raise TypeError("Curried function returned non-callable intermediate result")
+            result = result(arg)
+        return result
+
+    return uncurried
