@@ -3,8 +3,11 @@
 bool testEmptyList()
 {
     List* list = newList();
-    bool result =
-        (list != NULL) && (list->len == 0) && (list->head == NULL) && (list->tail == NULL);
+    bool valid1 = (list != NULL);
+    bool valid2 = (list->len == 0);
+    bool valid3 = (list->head == NULL);
+    bool valid4 = (list->tail == NULL);
+    bool result = valid1 && valid2 && valid3 && valid4;
 
     if (result) {
         puts("test 1 passed");
@@ -22,8 +25,13 @@ bool testInsert()
     insert(0, list, 13);
     insert(0, list, 12);
     insert(1, list, 9);
-    bool result = (list->len == 3) && (list->head->data == 12) && (list->head->next->data == 9)
-        && (list->tail->data == 13);
+
+    bool valid1 = (list->len == 3);
+    bool valid2 = (list->head->data == 12);
+    bool valid3 = (list->head->next->data == 9);
+    bool valid4 = (list->tail->data == 13);
+    bool result = valid1 && valid2 && valid3 && valid4;
+
     if (result) {
         puts("test 2 passed");
     } else {
@@ -42,8 +50,12 @@ bool testGet()
     int number1 = get(list, 0);
     int number2 = get(list, 2);
     int number3 = get(list, 100);
-    bool result;
-    if (number1 == 12 && number2 == 13 && number3 == -1) {
+    bool valid1 = (number1 == 12);
+    bool valid2 = (number2 == 13);
+    bool valid3 = (number3 == -1);
+    bool result = valid1 && valid2 && valid3;
+
+    if (result) {
         puts("test 3 passed");
         result = true;
     } else {
@@ -64,7 +76,11 @@ bool testFindIndexToInsert()
     int index2 = findIndexToInsert(list, 15);
     int index3 = findIndexToInsert(list, 35);
 
-    bool result = (index1 == 0) && (index2 == 1) && (index3 == 2);
+    bool valid1 = (index1 == 0);
+    bool valid2 = (index2 == 1);
+    bool valid3 = (index3 == 2);
+    bool result = valid1 && valid2 && valid3;
+
     if (result) {
         puts("test 4 passed");
     } else {
@@ -86,6 +102,7 @@ bool testFindIndexToRemove()
     bool valid3 = (findIndexToRemove(list, 30) == 2);
     bool invalid = (findIndexToRemove(list, 15) == -1);
     bool result = valid1 && valid2 && valid3 && invalid;
+
     if (result) {
         puts("test 5 passed");
     } else {
@@ -106,7 +123,11 @@ bool testRemoveElement()
     int index = findIndexToRemove(list, 20);
     listElementRemove(list, index);
 
-    bool result = (list->len == 2) && (list->head->data == 10) && (list->tail->data == 30);
+    bool valid1 = (list->len == 2);
+    bool valid2 = (list->head->data == 10);
+    bool valid3 = (list->tail->data == 30);
+    bool result = valid1 && valid2 && valid3;
+
     if (result) {
         puts("test 6 passed");
     } else {
@@ -125,6 +146,7 @@ bool testCheckIndex()
     bool invalid1 = !checkIndex(list, 1);
     bool invalid2 = !checkIndex(list, -1);
     bool result = valid && invalid1 && invalid2;
+
     if (result) {
         puts("test 7 passed");
     } else {
@@ -158,7 +180,9 @@ bool testGetFromSingleElementList()
     int value1 = get(list, 0);
     int value2 = get(list, 1);
 
-    bool result = (value1 == 42) && (value2 == -1);
+    bool valid1 = (value1 == 42);
+    bool valid2 = (value2 == -1);
+    bool result = valid1 && valid2;
 
     if (result) {
         puts("test 9 passed");
@@ -210,7 +234,10 @@ bool testFindIndexToRemoveSinglyElement()
     int index1 = findIndexToRemove(list, 25);
     int index2 = findIndexToRemove(list, 30);
 
-    bool result = (index1 == 0) && (index2 == -1);
+    bool valid1 = (index1 == 0);
+    bool valid2 = (index2 == -1);
+    bool result = valid1 && valid2;
+
     if (result) {
         puts("test 12 passed");
     } else {
@@ -226,7 +253,11 @@ bool testRemoveFromEmptyList()
     List* list = newList();
     listElementRemove(list, 0);
 
-    bool result = (list->len == 0) && (list->head == NULL) && (list->tail == NULL);
+    bool valid1 = (list->len == 0);
+    bool valid2 = (list->head == NULL);
+    bool valid3 = (list->tail == NULL);
+    bool result = valid1 && valid2 && valid3;
+
     if (result) {
         puts("test 13 passed");
     } else {
@@ -243,7 +274,11 @@ bool testRemoveFromSinglyElementList()
     insert(0, list, 99);
     listElementRemove(list, 0);
 
-    bool result = (list->len == 0) && (list->head == NULL) && (list->tail == NULL);
+    bool valid1 = (list->len == 0);
+    bool valid2 = (list->head == NULL);
+    bool valid3 = (list->tail == NULL);
+    bool result = valid1 && valid2 && valid3;
+
     if (result) {
         puts("test 14 passed");
     } else {
@@ -258,7 +293,11 @@ bool testCheckIndexEmptyList()
 {
     List* list = newList();
 
-    bool result = !checkIndex(list, 0) && !checkIndex(list, -1) && !checkIndex(list, 1);
+    bool invalid1 = !checkIndex(list, 0);
+    bool invalid2 = !checkIndex(list, -1);
+    bool invalid3 = !checkIndex(list, 1);
+    bool result = invalid1 && invalid2 && invalid3;
+
     if (result) {
         puts("test 15 passed");
     } else {
@@ -277,8 +316,12 @@ bool testInsertDuplicates()
     insert(2, list, 20);
     insert(3, list, 10);
 
-    bool result = (list->len == 4) && (list->head->data == 10) && (list->head->next->data == 10)
-        && (list->head->next->next->data == 20) && (list->tail->data == 10);
+    bool valid1 = (list->len == 4);
+    bool valid2 = (list->head->data == 10);
+    bool valid3 = (list->head->next->data == 10);
+    bool valid4 = (list->head->next->next->data == 20);
+    bool valid5 = (list->tail->data == 10);
+    bool result = valid1 && valid2 && valid3 && valid4 && valid5;
 
     if (result) {
         puts("test 16 passed");
@@ -302,7 +345,9 @@ bool testFindIndexToRemoveDuplicates()
     int index1 = findIndexToRemove(list, 10);
     int index2 = findIndexToRemove(list, 20);
 
-    bool result = (index1 == 0) && (index2 == 1);
+    bool valid1 = (index1 == 0);
+    bool valid2 = (index2 == 1);
+    bool result = valid1 && valid2;
 
     if (result) {
         puts("test 17 passed");
@@ -326,7 +371,9 @@ bool testRemoveWithDuplicates()
     int index = findIndexToRemove(list, 10);
     listElementRemove(list, index);
 
-    bool result = (list->len == 4) && (list->head->data == 20);
+    bool valid1 = (list->len == 4);
+    bool valid2 = (list->head->data == 20);
+    bool result = valid1 && valid2;
 
     if (result) {
         puts("test 18 passed");
