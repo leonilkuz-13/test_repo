@@ -7,7 +7,12 @@ int main(void)
     if (scanf("%d", &arraySize) != 1) {
         return 1;
     }
-    const int array[arraySize];
+    int array[arraySize];
+    for (int index = 0; index < arraySize; index++) {
+        if (scanf("%d", &array[index]) != 1) {
+            return 1;
+        }
+    }
     for (int index = 0; index < arraySize; index++) {
         if (array[index] == 0) {
             cnt++;

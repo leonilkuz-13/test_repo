@@ -10,6 +10,13 @@ int main(void)
     fgets(str, sizeof(str), stdin);
     fgets(substr, sizeof(substr), stdin);
 
+    if (fgets(str, sizeof(str), stdin) == NULL) {
+        return 1;
+    }
+    if (fgets(substr, sizeof(substr), stdin) == NULL) {
+        return 1;
+    }
+
     char* newlinePositionInStr = strchr(str, '\n');
     char* newlinePositionInSubstr = strchr(substr, '\n');
 

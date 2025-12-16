@@ -1,37 +1,44 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 int main(void)
 {
     int charIndex = 0;
     char inputString[101];
-    char currentChar;
+
+    for (int i = 0; i < sizeof(inputString); i++) {
+        inputString[i] = '\0';
+    }
 
     int scanResult;
-
+    bool inputError = false;
     while ((scanResult = getchar()) != EOF && scanResult != '\n' && charIndex < 100) {
-        currentChar = (char)scanResult;
+        char currentChar = (char)scanResult;
 
         if (currentChar != '{' && currentChar != '}' && currentChar != '[' && currentChar != ']'
             && currentChar != '>' && currentChar != '<') {
             inputString[charIndex++] = currentChar;
         } else {
-            puts("Incorrect input");
-            return 0;
+            inputError = true;
+            break;
         }
     }
 
-    inputString[charIndex] = '\0';
+    if (inputError) {
+        puts("Incorrect input");
+        return 0;
+    }
 
-    int stringLength = strlen(inputString);
+    size_t stringLength = strlen(inputString);
 
     int bracketCounter = 0;
-    int bracketFlag = 0;
+    bool bracketFound = false;
 
-    for (int stringIndex = 0; stringIndex < stringLength; stringIndex++) {
+    for (size_t stringIndex = 0; stringIndex < stringLength; stringIndex++) {
         if (inputString[stringIndex] == '(') {
             bracketCounter++;
-            bracketFlag = 1;
+            bracketFound = true;
         }
 
         if (inputString[stringIndex] == ')') {
@@ -49,7 +56,7 @@ int main(void)
         return 0;
     }
 
-    if (bracketFlag == 1) {
+    if (bracketFound) {
         puts("The balance of brackets is maintained");
     } else {
         puts("No brackets were entered");
