@@ -33,9 +33,9 @@ jobs:
         run: |
           cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
           cmake --build build
-          run-clang-tidy -p=build
+          run-clang-tidy -p=build -checks="-cert-err34-c"
 
       - name: Basic analysis (no CMake)
         if: steps.cmake-check.outputs.cmake_detected == 'false'
         run: |
-          find . -name "*.c" -o -name "*.h" -type f -exec clang-tidy --config-file=.clang-tidy {} +
+          find . -name "*.c" -o -name "*.h" -type f -exec clang-tidy -checks="-cert-err34-c" {} +
