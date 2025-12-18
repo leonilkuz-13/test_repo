@@ -242,3 +242,14 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,linux,c
+# Homework files
+src/homework in C/
+src/homework in Python/
+src/jj.py
+src/q.py
+src/screenshots/
+src/test.c
+src/1j.py
+src/6.py
+src/test/test_heng_sort.py
+src/homework_in_bythen/
