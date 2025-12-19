@@ -15,15 +15,15 @@ def processing_individual_letters(string: str) -> int:
 def reverse_lexicographical_order(string1: str, string2: str) -> bool:
     array1 = processing_individual_letters(string1)
     array2 = processing_individual_letters(string2)
-    if len(array1) > len(array2):
-        return True
-    elif len(array1) < len(array2):
-        return False
-    for i in range(len(array1)):
+    for i in range(min(len(array1), len(array2))):
         if array1[i] > array2[i]:
             return True
         elif array1[i] < array2[i]:
             return False
+    if len(array1) > len(array2):
+        return True
+    elif len(array1) < len(array2):
+        return False
 
 
 print(reverse_lexicographical_order(input(), input()))
