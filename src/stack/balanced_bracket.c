@@ -1,33 +1,37 @@
 #include "stack.h"
 
-void append(char* ch, int* capacity, int* lenght, char** str)
+void append(const char character, int* capacity, int* length, char** string)
 {
-    if (*capacity - 1 <= *lenght) {
-        char* ptr = malloc(sizeof(char) * *capacity * 2);
-        if (ptr == NULL)
+    if (*capacity - 1 <= *length) {
+        char* pointer = malloc(sizeof(char) * *capacity * 2);
+        if (pointer == NULL) {
             return;
-
+        }
         *capacity *= 2;
-        strcpy(ptr, *str);
-        free(*str);
-        *str = ptr;
+        strcpy(pointer, *string);
+        free(*string);
+        *string = pointer;
     }
-    (*str)[*lenght] = *ch;
-    (*lenght)++;
-    (*str)[*lenght] = '\0';
+    (*string)[*length] = character;
+    (*length)++;
+    (*string)[*length] = '\0';
 }
 
 char* reading(void)
 {
     int capacity = 10;
-    int lenght = 0;
-    char* str = malloc(sizeof(char) * capacity);
-    if (str == NULL)
+    int length = 0;
+    char* string = malloc(sizeof(char) * capacity);
+    if (string == NULL) {
         return NULL;
-    char ch;
-    while ((ch = getchar()) != EOF)
-        append(&ch, &capacity, &lenght, &str);
-    return str;
+    }
+    memset(string, 0, capacity);
+    int character_int;
+    while ((character_int = getchar()) != EOF) {
+        char character = (char)character_int;
+        append(character, &capacity, &length, &string);
+    }
+    return string;
 }
 
 char matching(char bracket)
@@ -42,18 +46,23 @@ char matching(char bracket)
 
 int main(void)
 {
-    char* str = reading();
+    char* string = reading();
     Node* top = NULL;
-    size_t len = strlen(str);
+    if (string == NULL) {
+        return 1;
+    }
 
-    for (int i = 0; i < len; i++) {
-        if (str[i] == '(' || str[i] == '[' || str[i] == '{')
-            top = push(top, str[i]);
-        else if (str[i] == ')' || str[i] == ']' || str[i] == '}') {
-            char expected = matching(str[i]);
+    size_t length = strlen(string);
+
+    for (size_t index = 0; index < length; index++) {
+        if (string[index] == '(' || string[index] == '[' || string[index] == '{') {
+            top = push(top, string[index]);
+        } else if (string[index] == ')' || string[index] == ']' || string[index] == '}') {
+            char expected = matching(string[index]);
             if (top == NULL || top->symbol != expected) {
                 puts("error balanced");
                 freestack(top);
+                free(string);
                 return 1;
             }
             top = pop(top);
@@ -63,10 +72,12 @@ int main(void)
     if (top == NULL) {
         puts("bracket balanced");
         freestack(top);
+        free(string);
         return 0;
     } else {
         puts("unclosed brackets");
         freestack(top);
+        free(string);
         return 1;
     }
 }

@@ -1,28 +1,34 @@
 #include "stack.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 Node* push(Node* top, char symbol)
 {
-    Node* ptr = malloc(sizeof(Node));
-    ptr->symbol = symbol;
-    ptr->last = top;
-    return ptr;
+    Node* pointer = malloc(sizeof(Node));
+    if (pointer == NULL) {
+        return top;
+    }
+    pointer->symbol = symbol;
+    pointer->last = top;
+    return pointer;
 }
 
 Node* pop(Node* top)
 {
-    if (top == NULL)
+    if (top == NULL) {
         return top;
-    Node* ptr = top->last;
+    }
+    Node* pointer = top->last;
     free(top);
-    return ptr;
+    return pointer;
 }
 
 void freestack(Node* top)
 {
     while (top != NULL) {
-        Node* temp = top;
+        Node* temporary = top;
         top = top->last;
-        free(temp);
+        free(temporary);
     }
 }
 
@@ -37,7 +43,8 @@ void show(Node* top)
 
 char peek(Node* top)
 {
-    if (top == NULL)
+    if (top == NULL) {
         return 0;
+    }
     return top->symbol;
 }
