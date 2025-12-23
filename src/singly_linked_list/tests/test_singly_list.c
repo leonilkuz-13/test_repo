@@ -1,4 +1,5 @@
 #include "singly_linked_list.h"
+#include <string.h>
 
 bool testEmptyList()
 {
