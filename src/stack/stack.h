@@ -7,12 +7,12 @@
 typedef struct ObjectStack {
     char symbol;
     struct ObjectStack* last;
-} OBJ;
+} Node;
 
-OBJ* push(OBJ* top, char symbol);
-OBJ* pop(OBJ* top);
-void freestack(OBJ* top);
-void show(OBJ* top);
-char peek(OBJ* top);
+Node* push(Node* top, char symbol);
+Node* pop(Node* top);
+void freestack(Node* top);
+void show(Node* top);
+char peek(Node* top);
 
 #endif

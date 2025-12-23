@@ -29,31 +29,29 @@ char* reading(void)
         append(&ch, &capacity, &lenght, &str);
     return str;
 }
+
+char matching(char bracket)
+{
+    switch (bracket) {
+        case ')': return '(';
+        case ']': return '[';
+        case '}': return '{';
+        default: return '\0';
+    }
+}
+
 int main(void)
 {
     char* str = reading();
-    OBJ* top = NULL;
+    Node* top = NULL;
     size_t len = strlen(str);
 
     for (int i = 0; i < len; i++) {
-        if (str[i] == '(' || str[i] == '[' || str[i] == '{') {
+        if (str[i] == '(' || str[i] == '[' || str[i] == '{')
             top = push(top, str[i]);
-        } else if (str[i] == ')') {
-            if (top == NULL || top->symbol != '(') {
-                puts("error balanced");
-                freestack(top);
-                return 1;
-            }
-            top = pop(top);
-        } else if (str[i] == ']') {
-            if (top == NULL || top->symbol != '[') {
-                puts("error balanced");
-                freestack(top);
-                return 1;
-            }
-            top = pop(top);
-        } else if (str[i] == '}') {
-            if (top == NULL || top->symbol != '{') {
+        else if (str[i] == ')' || str[i] == ']' || str[i] == '}') {
+            char expected = matching(str[i]);
+            if (top == NULL || top->symbol != expected) {
                 puts("error balanced");
                 freestack(top);
                 return 1;

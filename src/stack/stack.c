@@ -1,41 +1,41 @@
 #include "stack.h"
 
-OBJ* push(OBJ* top, char symbol)
+Node* push(Node* top, char symbol)
 {
-    OBJ* ptr = malloc(sizeof(OBJ));
+    Node* ptr = malloc(sizeof(Node));
     ptr->symbol = symbol;
     ptr->last = top;
     return ptr;
 }
 
-OBJ* pop(OBJ* top)
+Node* pop(Node* top)
 {
     if (top == NULL)
         return top;
-    OBJ* ptr_last = top->last;
+    Node* ptr = top->last;
     free(top);
-    return ptr_last;
+    return ptr;
 }
 
-void freestack(OBJ* top)
+void freestack(Node* top)
 {
     while (top != NULL) {
-        OBJ* temp = top;
+        Node* temp = top;
         top = top->last;
         free(temp);
     }
 }
 
-void show(OBJ* top)
+void show(Node* top)
 {
-    OBJ* current = top;
+    Node* current = top;
     while (current != NULL) {
         printf("%c ", current->symbol);
         current = current->last;
     }
 }
 
-char peek(OBJ* top)
+char peek(Node* top)
 {
     if (top == NULL)
         return 0;
