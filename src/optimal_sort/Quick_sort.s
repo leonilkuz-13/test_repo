@@ -1,8 +1,8 @@
-	.file	"quick_sort.c"
+	.file	"Quick_sort.c"
 	.text
-	.globl	distribution
-	.type	distribution, @function
-distribution:
+	.globl	partition
+	.type	partition, @function
+partition:
 .LFB0:
 	.cfi_startproc
 	endbr64
@@ -92,7 +92,7 @@ distribution:
 	ret
 	.cfi_endproc
 .LFE0:
-	.size	distribution, .-distribution
+	.size	partition, .-partition
 	.globl	quickSort
 	.type	quickSort, @function
 quickSort:
@@ -116,7 +116,7 @@ quickSort:
 	movq	-24(%rbp), %rax
 	movl	%ecx, %esi
 	movq	%rax, %rdi
-	call	distribution
+	call	partition
 	movl	%eax, -4(%rbp)
 	movl	-4(%rbp), %edx
 	movl	-28(%rbp), %ecx

@@ -1,35 +1,38 @@
 #include <stdio.h>
-#include "quick_sort.h"
+#include "Quick_sort.h"
 #define MAX_SIZE 100
 
-void reading(int arr[], int* lenArray)
+void reading(int array[], int* length)
 {
-    while (*lenArray < MAX_SIZE && scanf("%d", arr + *lenArray) == 1)
-        (*lenArray)++;
+    while (*length < MAX_SIZE && scanf("%d", array + *length) == 1) {
+        (*length)++;
+    }
 }
 
 int main(void)
 {
-    int arr[MAX_SIZE] = {};
-    int lenArray = 0;
+    int array[MAX_SIZE] = {};
+    int length = 0;
 
-    reading(arr, &lenArray);
+    reading(array, &length);
 
-    if (lenArray == 0) {
-        puts("0\n");
+    if (length == 0) {
+        puts("0");
         return 0;
     }
 
-    int array1[MAX_SIZE];
-    for (int i = 0; i < lenArray; i++)
-        array1[i] = arr[i];
+    int arrayCopy[MAX_SIZE];
+    for (int i = 0; i < length; i++) {
+        arrayCopy[i] = array[i];
+    }
 
-    quickSort(arr, 0, lenArray - 1);
+    quickSort(array, 0, length - 1);
 
     int count = 0;
-    for (int i = 0; i < lenArray; i++) {
-        if (arr[i] != array1[i])
+    for (int i = 0; i < length; i++) {
+        if (array[i] != arrayCopy[i]) {
             count++;
+        }
     }
     printf("%d\n", count);
 

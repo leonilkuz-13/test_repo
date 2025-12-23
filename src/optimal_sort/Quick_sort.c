@@ -1,35 +1,37 @@
 #include "Quick_sort.h"
+#include <stdbool.h>
 
-int partittion(int arr[], int low, int high)
+int partition(int array[], int low, int high)
 {
-    int pivot = arr[(low + high) / 2];
+    int pivot = array[(low + high) / 2];
     int left = low - 1;
     int right = high + 1;
-    int t;
+    int temporary;
 
     while (true) {
         do {
             left++;
-        } while (arr[left] < pivot);
+        } while (array[left] < pivot);
 
         do {
             right--;
-        } while (arr[right] > pivot);
+        } while (array[right] > pivot);
 
-        if (left >= right)
+        if (left >= right) {
             return right;
+        }
 
-        t = arr[left];
-        arr[left] = arr[right];
-        arr[right] = t;
+        temporary = array[left];
+        array[left] = array[right];
+        array[right] = temporary;
     }
 }
 
-void quickSort(int arr[], int low, int high)
+void quickSort(int array[], int low, int high)
 {
     if (low < high) {
-        int p = partittion(arr, low, high);
-        quickSort(arr, low, p);
-        quickSort(arr, p + 1, high);
+        int pivotIndex = partition(array, low, high);
+        quickSort(array, low, pivotIndex);
+        quickSort(array, pivotIndex + 1, high);
     }
 }
