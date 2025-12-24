@@ -1,5 +1,4 @@
 #include "Quick_sort.h"
-#include <stdbool.h>
 
 int partition(int array[], int low, int high)
 {

@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "Quick_sort.h"
 #define MAX_SIZE 100
 
@@ -11,7 +10,7 @@ void reading(int array[], int* length)
 
 int main(void)
 {
-    int array[MAX_SIZE] = {};
+    int array[MAX_SIZE] = { 0 };
     int length = 0;
 
     reading(array, &length);
@@ -22,19 +21,19 @@ int main(void)
     }
 
     int arrayCopy[MAX_SIZE];
-    for (int i = 0; i < length; i++) {
-        arrayCopy[i] = array[i];
+    for (int index = 0; index < length; index++) {
+        arrayCopy[index] = array[index];
     }
 
     quickSort(array, 0, length - 1);
 
     int count = 0;
-    for (int i = 0; i < length; i++) {
-        if (array[i] != arrayCopy[i]) {
+    for (int index = 0; index < length; index++) {
+        if (array[index] != arrayCopy[index]) {
             count++;
         }
     }
-    printf("%d\n", count);
+    printf("%d", count);
 
     return 0;
 }
