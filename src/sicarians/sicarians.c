@@ -2,39 +2,47 @@
 
 int main()
 {
-    int n, m;
-
+    int count;
     puts("enter the number of warriors: ");
-    scanf("%d", &n);
+    if (scanf("%d", &count) != 1) {
+        puts("Invalid input!!!");
+        return -1;
+    }
 
+    int step;
     puts("enter the number of step: ");
-    scanf("%d", &m);
-
-    if (n <= 0 || m <= 0) {
+    if (scanf("%d", &step) != 1) {
+        puts("Invalid input!!!");
         return -1;
     }
 
-    LIST* warriors = initList();
-    if (!warriors) {
+    if (count <= 0 || step <= 0) {
+        puts("Values must be positive!");
         return -1;
     }
 
-    for (int i = 1; i <= n; i++) {
-        appendToBehind(i, warriors);
+    List* list = initList();
+    if (list == NULL) {
+        puts("Memory allocation failed!");
+        return -1;
     }
 
-    int current_index = 0;
+    for (int num = 1; num <= count; num++) {
+        appendToBehind(num, list);
+    }
 
-    while (warriors->len > 1) {
-        int index_to_remove = (current_index + m - 1) % warriors->len;
-        elementRemoveToIndex(warriors, index_to_remove);
-        current_index = index_to_remove;
-        if (current_index >= warriors->len) {
-            current_index = 0;
+    Node* current = list->head;
+    while (list->len > 1) {
+        for (int stepcnt = 1; stepcnt < step; stepcnt++) {
+            current = current->next;
         }
+        Node* ptr = current->next;
+        elementRemoveToValue(list, current->number);
+        current = ptr;
     }
-    int survivor = warriors->head->number;
-    deleteList(warriors);
+
+    int survivor = list->head->number;
+    deleteList(list);
 
     printf("position of a surviving warrior: %d\n", survivor);
     return 0;
