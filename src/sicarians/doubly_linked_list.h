@@ -1,34 +1,28 @@
-#ifndef DOUBLY_LINKED_LIST
-#define DOUBLY_LINKED_LIST
-
+#pragma once
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
-#include <assert.h>
 
 typedef struct Node
 {
     int number;
     struct Node *last;
     struct Node *next;
-} NODE;
+} Node;
 
 typedef struct list
 {
     int len;
-    NODE *tail;
-    NODE *head;
-} LIST;
+    Node *tail;
+    Node *head;
+} List;
 
-LIST *initList();
-void printList(LIST *list);
-void deleteList(LIST *list);
-void appendToEmptyList(LIST *list, NODE *ptr);
-void appendToBegging(int number, LIST *list);
-void appendToBehind(int number, LIST *list);
-void append(int number, LIST *list, int index);
-NODE *elementSearch(LIST *list, int number);
-void elementRemoveToValue(LIST *list, int number);
-void elementRemoveToIndex(LIST *list, int index);
-
-#endif
+List *initList();
+void printList(List *list);
+void deleteList(List *list);
+void appendToEmptyList(List *list, Node *ptr);
+void appendToBegging(int number, List *list);
+void appendToBehind(int number, List *list);
+void append(int number, List *list, int index);
+Node *elementSearch(List *list, int number);
+void elementRemoveToValue(List *list, int number);
+void elementRemoveToIndex(List *list, int index);
