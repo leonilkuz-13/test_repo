@@ -49,7 +49,7 @@ int main(void)
                         ;
                     }
                 }
-                removeByValue(list, value);
+                listElementRemove(list, value);
                 break;
 
             case PRINT: printList(list); break;
