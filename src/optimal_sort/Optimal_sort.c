@@ -33,7 +33,5 @@ int main(void)
             count++;
         }
     }
-    printf("%d", count);
-
-    return 0;
+    return count;
 }
