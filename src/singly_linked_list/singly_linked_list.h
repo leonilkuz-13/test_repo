@@ -1,5 +1,4 @@
-#ifndef SINGLY_LINKED_LIST
-#define SINGLY_LINKED_LIST
+#pragma once
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -15,14 +14,8 @@ typedef struct List {
     int len;
 } List;
 
-bool checkIndex(List* list, int index);
 List* newList();
-int findIndexToInsert(List* l, int number);
-int findIndexToRemove(List* l, int number);
-void insert(int index, List* l, int number);
-int get(List* l, int index);
-void listElementRemove(List* l, int index);
-void printList(List* l);
-void deleteList(List* l);
-
-#endif
+void insert(List* list, int number);
+void listElementRemove(List* list, int number);
+void printList(List* list);
+void deleteList(List* list);

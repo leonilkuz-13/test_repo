@@ -4,7 +4,7 @@ typedef enum instruction { EXIT, ADD, REMOVE, PRINT } Instruction;
 
 int main(void)
 {
-    List* l = newList();
+    List* list = newList();
     int value;
     Instruction choice;
 
@@ -25,7 +25,7 @@ int main(void)
         choice = (Instruction)input;
         switch (choice) {
             case EXIT:
-                deleteList(l);
+                deleteList(list);
                 puts("list released");
                 break;
 
@@ -36,8 +36,7 @@ int main(void)
                     while (getchar() != '\n')
                         continue;
                 }
-                int index_add = findIndexToInsert(l, value);
-                insert(index_add, l, value);
+                insert(list, value);
                 break;
 
             case REMOVE:
@@ -47,12 +46,10 @@ int main(void)
                     while (getchar() != '\n')
                         continue;
                 }
-
-                int index_remove = findIndexToRemove(l, value);
-                listElementRemove(l, index_remove);
+                listElementRemove(list, value);
                 break;
 
-            case PRINT: printList(l); break;
+            case PRINT: printList(list); break;
 
             default: break;
         }
