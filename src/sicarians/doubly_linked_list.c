@@ -3,8 +3,9 @@
 List* initList()
 {
     List* list = malloc(sizeof(List));
-    if (list == NULL)
+    if (list == NULL) {
         return NULL;
+    }
     list->len = 0;
     list->tail = NULL;
     list->head = NULL;
@@ -14,22 +15,27 @@ List* initList()
 
 void printList(List* list)
 {
-    if (list == NULL)
+    if (list == NULL) {
         return;
+    }
     if (list->len == 0) {
         printf("Empty list\n");
         return;
-    } else if (list->len == 1) {
-        printf("%d ", list->head->number);
-    } else {
-        Node* current = list->head;
-        int count = 0;
-        while (count != list->len) {
-            printf("%d ", current->number);
-            current = current->next;
-            count++;
-        }
     }
+    if (list->len == 1) {
+        printf("%d ", list->head->number);
+        printf("\n");
+        return;
+    }
+
+    Node* current = list->head;
+    int count = 0;
+    while (count != list->len) {
+        printf("%d ", current->number);
+        current = current->next;
+        count++;
+    }
+    printf("\n");
 }
 
 void deleteList(List* list)
@@ -60,8 +66,9 @@ void appendToEmptyList(List* list, Node* ptr)
 void appendToBegging(int number, List* list)
 {
     Node* ptr = malloc(sizeof(Node));
-    if (ptr == NULL)
+    if (ptr == NULL) {
         return;
+    }
     ptr->number = number;
     if (list->len == 0) {
         appendToEmptyList(list, ptr);
@@ -78,8 +85,9 @@ void appendToBegging(int number, List* list)
 void appendToBehind(int number, List* list)
 {
     Node* ptr = malloc(sizeof(Node));
-    if (ptr == NULL)
+    if (ptr == NULL) {
         return;
+    }
     ptr->number = number;
     if (list->len == 0) {
         appendToEmptyList(list, ptr);
@@ -95,42 +103,54 @@ void appendToBehind(int number, List* list)
 
 void append(int number, List* list, int index)
 {
-    if (list == NULL)
+    if (list == NULL) {
         return;
+    }
     if (index < 0 || index > list->len) {
         return;
-    } else if (index == 0)
-        appendToBegging(number, list);
-    else if (index == list->len)
-        appendToBehind(number, list);
-    else {
-        Node* current = malloc(sizeof(Node));
-        if (current == NULL)
-            return;
-        int count = 0;
-        current->number = number;
-        Node* ptr = list->head;
-        while (count < index) {
-            ptr = ptr->next;
-            count++;
-        }
-        current->next = ptr;
-        current->last = ptr->last;
-        ptr->last->next = current;
-        ptr->last = current;
-        list->len++;
     }
+
+    if (index == 0) {
+        appendToBegging(number, list);
+        return;
+    }
+
+    if (index == list->len) {
+        appendToBehind(number, list);
+        return;
+    }
+
+    Node* current = malloc(sizeof(Node));
+    if (current == NULL) {
+        return;
+    }
+
+    int count = 0;
+    current->number = number;
+    Node* ptr = list->head;
+    while (count < index) {
+        ptr = ptr->next;
+        count++;
+    }
+    current->next = ptr;
+    current->last = ptr->last;
+    ptr->last->next = current;
+    ptr->last = current;
+    list->len++;
 }
 
 Node* elementSearch(List* list, int number)
 {
-    if (list == NULL)
+    if (list == NULL) {
         return NULL;
+    }
+
     Node* current = list->head;
     int count = 0;
     while (count < list->len) {
-        if (current->number == number)
+        if (current->number == number) {
             return current;
+        }
         current = current->next;
         count++;
     }
@@ -139,23 +159,31 @@ Node* elementSearch(List* list, int number)
 
 void elementRemoveToValue(List* list, int number)
 {
-    if (list == NULL)
+    if (list == NULL) {
         return;
+    }
+
     Node* ptr = elementSearch(list, number);
-    if (ptr == NULL)
+    if (ptr == NULL) {
         return;
+    }
+
     if (list->len > 1) {
         ptr->last->next = ptr->next;
         ptr->next->last = ptr->last;
     }
+
     if (ptr == list->head) {
         list->head = (list->len > 1) ? ptr->next : NULL;
     }
+
     if (ptr == list->tail) {
         list->tail = (list->len > 1) ? ptr->last : NULL;
     }
+
     list->len--;
     free(ptr);
+
     if (list->len == 0) {
         list->head = NULL;
         list->tail = NULL;
@@ -164,31 +192,38 @@ void elementRemoveToValue(List* list, int number)
 
 void elementRemoveToIndex(List* list, int index)
 {
-    if (list == NULL)
+    if (list == NULL) {
         return;
+    }
+
     if (index < 0 || index > list->len - 1) {
         puts("Invalid index!");
         return;
     }
+
     Node* ptr = list->head;
     int count = 0;
     while (count < index) {
         ptr = ptr->next;
         count++;
     }
+
     if (list->len > 1) {
         ptr->last->next = ptr->next;
         ptr->next->last = ptr->last;
     }
+
     if (ptr == list->head) {
         list->head = (list->len > 1) ? ptr->next : NULL;
     }
+
     if (ptr == list->tail) {
         list->tail = (list->len > 1) ? ptr->last : NULL;
     }
 
     list->len--;
     free(ptr);
+
     if (list->len == 0) {
         list->head = NULL;
         list->tail = NULL;
