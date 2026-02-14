@@ -1,0 +1,114 @@
+#include "stack.h"
+
+void append(const char CHARACTER, int* capacity, int* length, char** string)
+{
+    if (*capacity - 1 <= *length) {
+        char* pointer = malloc(sizeof(char) * *capacity * 2);
+        if (pointer == NULL) {
+            return;
+        }
+        *capacity *= 2;
+        memcpy(pointer, *string, *length + 1);
+        free(*string);
+        *string = pointer;
+    }
+    (*string)[*length] = CHARACTER;
+    (*length)++;
+    (*string)[*length] = '\0';
+}
+
+char* reading(int* capacity, int* length)
+{
+    char* string = malloc(sizeof(char) * *capacity);
+    if (string == NULL) {
+        return NULL;
+    }
+    memset(string, 0, *capacity);
+    int characterInt;
+    while ((characterInt = getchar()) != EOF) {
+        char character = (char)characterInt;
+        append(character, capacity, length, &string);
+    }
+    return string;
+}
+
+int operand(char symbol)
+{
+    if (symbol == '+' || symbol == '*' || symbol == '-' || symbol == '/') {
+        return 1;
+    }
+    return 0;
+}
+
+int digit(char symbol)
+{
+    if (operand(symbol) == 0 && symbol != ')' && symbol != '(') {
+        return 1;
+    }
+    return 0;
+}
+
+int operandComparison(char symbol)
+{
+    switch (symbol) {
+        case '+':
+        case '-': return 1;
+        case '*':
+        case '/': return 2;
+        case '^': return 3;
+        default: return 0;
+    }
+}
+
+int main(void)
+{
+    int capacity = 2;
+    int length = 0;
+    char* string = reading(&capacity, &length);
+    if (string == NULL) {
+        return 1;
+    }
+
+    Node* top = NULL;
+    size_t strLength = strlen(string);
+    char output[strLength * 2 + 1];
+    memset(output, 0, sizeof(output));
+    size_t outputIndex = 0;
+
+    for (size_t i = 0; i < strLength; i++) {
+        if (digit(string[i]) == 1) {
+            output[outputIndex++] = string[i];
+            output[outputIndex++] = ' ';
+        } else if (operand(string[i]) == 1) {
+            while (top != NULL && peek(top) != '('
+                   && operandComparison(peek(top)) >= operandComparison(string[i])) {
+                output[outputIndex++] = peek(top);
+                output[outputIndex++] = ' ';
+                top = pop(top);
+            }
+            top = push(top, string[i]);
+        } else if (string[i] == '(') {
+            top = push(top, string[i]);
+        } else if (string[i] == ')') {
+            while (top != NULL && peek(top) != '(') {
+                output[outputIndex++] = peek(top);
+                output[outputIndex++] = ' ';
+                top = pop(top);
+            }
+            top = pop(top);
+        }
+    }
+
+    while (top != NULL) {
+        output[outputIndex++] = peek(top);
+        output[outputIndex++] = ' ';
+        top = pop(top);
+    }
+
+    free(string);
+
+    for (size_t i = 0; i < strlen(output); i++) {
+        printf("%c", output[i]);
+    }
+    return 0;
+}
