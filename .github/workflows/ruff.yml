@@ -5,9 +5,29 @@ on: [push, pull_request]
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install Ruff
+      run: pip install ruff
+      
+    - name: Run Ruff
+      run: ruff check --output-format=github src/
+      
+    - name: Auto-fix Ruff issues
+      run: ruff check --fix --exit-zero src/
+      
+    - name: Check formatting
+      run: ruff format --check src/
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -33,3 +53,9 @@ jobs:
         else
           echo "No test files found, skipping tests"
         fi
+        pip install pytest
+        
+    - name: Run tests from project root
+      run: |
+        cd src
+        python -m pytest tests/ -v --import-mode=append
